@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import { ListAccountTransactionsResponse } from "../types/etherscanApi/ListAccountTransactionsResponse";
 import { EtherscanInfo } from "./etherscanApiUrlMap";
 
 export const getTransactionList = async (
@@ -10,6 +11,6 @@ export const getTransactionList = async (
   const apiRoute = `/api?module=account&action=txlist&address=${address}&startblock=${startBlock}&sort=asc&apikey=${apiToken}`;
   const fullUrl = `${url}${apiRoute}`;
   const resp = await fetch(fullUrl);
-  const json: BlockApiResponse = await resp.json();
+  const json: ListAccountTransactionsResponse = await resp.json();
   return json.result;
 };

@@ -1,4 +1,4 @@
-interface Result {
+export interface Transaction {
   blockNumber: string;
   timeStamp: string;
   hash: string;
@@ -22,5 +22,5 @@ interface Result {
 export interface ListAccountTransactionsResponse {
   status: string;
   message: string;
-  result: Result[];
+  result: Transaction[];
 }
