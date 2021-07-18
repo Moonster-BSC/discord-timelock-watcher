@@ -1,6 +1,6 @@
 // State of the app. Used by main driver. Can be modified via bot commands
 
-import { TimelockInfo } from "../types/timelockInfo";
+import { TimelockStateInfo } from "../types/timelockStateInfo";
 import { addressBook, ChainId } from "blockchain-addressbook";
 import { SupportedChainId } from "../types";
 const {
@@ -24,7 +24,10 @@ const isChainTrackedMap: Record<SupportedChainId, boolean> = {
 };
 
 // map of timelocks to track. Nickname to address map. Comes with some defaults, for testing
-const timelockMap: Record<SupportedChainId, Record<string, TimelockInfo>> = {
+const timelockMap: Record<
+  SupportedChainId,
+  Record<string, TimelockStateInfo>
+> = {
   [ChainId.polygon]: {
     polypup: {
       nickname: "polypup",
@@ -76,7 +79,7 @@ export const setBlockIndex = (newIndex: number): void => {
   blockIndex = newIndex;
 };
 
-export const addTimelockToMap = (timelock: TimelockInfo): void => {
+export const addTimelockToMap = (timelock: TimelockStateInfo): void => {
   timelockMap[timelock.chainId][timelock.nickname] = timelock;
 };
 

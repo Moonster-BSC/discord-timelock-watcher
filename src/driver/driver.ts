@@ -19,7 +19,7 @@ import {
   getTrackedChains,
 } from "../state/state";
 import { Transaction } from "../types/etherscanApi/ListAccountTransactionsResponse";
-import { TimelockInfo } from "../types/timelockInfo";
+import { TimelockStateInfo } from "../types/timelockStateInfo";
 import { getTransactionEtherscanUrlFromHash } from "./getTransactionEtherscanUrlFromHash";
 
 const intervalInHoursOptions = 1 | 2 | 4;
@@ -43,7 +43,8 @@ const driver = async () => {
     console.log(`Analyzing chain ${chain.toString()}`);
     // chain relevant variables
     const etherscanInfo: EtherscanInfo = etherscanApiUrlMap[chain];
-    const chainTimelocks: Record<string, TimelockInfo> = timelockMap[chain];
+    const chainTimelocks: Record<string, TimelockStateInfo> =
+      timelockMap[chain];
 
     // loop through all timelocks in chain
     for (const nickname of Object.keys(chainTimelocks)) {

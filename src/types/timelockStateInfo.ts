@@ -1,6 +1,6 @@
 import { SupportedChainId } from ".";
 
-export interface TimelockInfo {
+export interface TimelockStateInfo {
   // normalized, wonder if needed though
   nickname: string;
   address: string;
