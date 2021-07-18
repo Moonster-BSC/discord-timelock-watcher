@@ -20,6 +20,7 @@ import {
 } from "../state/state";
 import { Transaction } from "../types/etherscanApi/ListAccountTransactionsResponse";
 import { TimelockInfo } from "../types/timelockInfo";
+import { getTransactionEtherscanUrlFromHash } from "./getTransactionEtherscanUrlFromHash";
 
 const intervalInHoursOptions = 1 | 2 | 4;
 
@@ -67,6 +68,11 @@ const driver = async () => {
       // 2. Build scanurls to see transaction
       const transactionUrls = transactionList.map((tx) => {
         const { hash } = tx;
+        const transactionEtherscanUrl = getTransactionEtherscanUrlFromHash(
+          etherscanInfo.uiUrl,
+          hash
+        );
+        return transactionEtherscanUrl;
       });
     }
   }
