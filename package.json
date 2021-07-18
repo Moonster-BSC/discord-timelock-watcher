@@ -8,6 +8,7 @@
     "tsc": "tsc"
   },
   "dependencies": {
+    "blockchain-addressbook": "^0.1.111",
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0",
     "typescript": "^4.3.5"

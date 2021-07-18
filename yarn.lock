@@ -274,6 +274,11 @@ balanced-match@^1.0.0:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.2.tgz#e83e3a7e3f300b34cb9d87f615fa0cbf357690ee"
   integrity sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==
 
+blockchain-addressbook@^0.1.111:
+  version "0.1.111"
+  resolved "https://registry.yarnpkg.com/blockchain-addressbook/-/blockchain-addressbook-0.1.111.tgz#103b7d476914d8098f1b864b808bd016d79e42ab"
+  integrity sha512-8pk1sz3PA7e3CLp8f5Lu/6+3cOAtNvjowTINM05Nq+MRoagkhv1326He0N5H57261f9KB/9V2/9HM1jdwBJI5Q==
+
 brace-expansion@^1.1.7:
   version "1.1.11"
   resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-1.1.11.tgz#3c7fcbf529d87226f3d2f52b966ff5271eb441dd"
