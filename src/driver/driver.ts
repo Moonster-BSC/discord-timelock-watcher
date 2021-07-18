@@ -35,6 +35,10 @@ const driver = async () => {
   const timelockMap = getTimelockMap();
   const trackedChains = getTrackedChains();
   const startBlock = getBlockIndex();
+
+  // output state
+  const allTimelockTransactionsSinceStartBlock: string[] = [];
+
   for (const chain of trackedChains) {
     console.log(`Analyzing chain ${chain.toString()}`);
     // chain relevant variables
