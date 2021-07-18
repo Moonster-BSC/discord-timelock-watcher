@@ -1,19 +1,21 @@
-import Discord from 'discord.js';
-const bot = new Discord.Client()
+import Discord from "discord.js";
+import { messageEventHandler } from "./eventsHandlers/messageEventHandler";
+const bot = new Discord.Client();
+
+export type BotEvents = Extract<keyof Discord.ClientEvents, "message">;
 
 // so we easily know what events are implemented
-const botEventNames: Record<Extract<keyof Discord.ClientEvents, 'message'>, keyof Discord.ClientEvents> = {
-message: "message"
-}
+const botEventNames: Record<BotEvents, BotEvents> = {
+  message: "message",
+};
 
-bot.on('message', (message: Discord.Message) => {
-    if (message.content === "$loop") { 
-      var interval = setInterval (function () {
-        message.channel.send("123")
-      }, 1 * 1000); 
-    }
-});
+// TODO: type to event handler type
+const eventHandlerMap: Record<BotEvents, any> = {
+  message: messageEventHandler,
+};
 
-const token = process.env.token
+bot.on(botEventNames.message, eventHandlerMap[botEventNames.message]);
 
-bot.login
+const token = process.env["token"];
+
+bot.login(token);
