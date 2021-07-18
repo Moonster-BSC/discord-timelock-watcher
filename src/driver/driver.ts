@@ -4,7 +4,7 @@ Algorithm:
 
 Every `intervalInHours`, for every chain, for every timelock
 1. Make api call to get all transactions.
-2. Build scanurls to see transaction
+2. Build display objects (TimelockTransactionDisplayInfo)
 3. Push transaction object to global array
 4. Sort global array
 5. For each entry in array, send message to channel informing of transaction
@@ -18,10 +18,12 @@ import {
   getTimelockMap,
   getTrackedChains,
 } from "../state/state";
+import { SupportedChainId } from "../types";
 import { Transaction } from "../types/etherscanApi/ListAccountTransactionsResponse";
 import { TimelockStateInfo } from "../types/timelockStateInfo";
 import { TimelockTransactionDisplayInfo } from "../types/timelockTransactionDisplayInfo";
-import { getTransactionEtherscanUrlFromHash as getTransactionUiUrlFromHash } from "./getTransactionUiUrlFromHash";
+import { buildTimelockTransactionDisplayInfoFromTransaction } from "./helpers/buildTimelockTransactionDisplayInfoFromTransaction";
+import { pushArray } from "./helpers/pushArray";
 
 const intervalInHoursOptions = 1 | 2 | 4;
 
@@ -72,35 +74,29 @@ const driver = async () => {
         continue;
       }
 
-      // 2. Build scanurls to see transaction
+      // 2. Build display objects
       const transactionUrls: TimelockTransactionDisplayInfo[] =
-        transactionList.map((tx) => {
-          const { hash, blockNumber, timeStamp, from } = tx;
+        buildTimelockTransactionDisplayInfoFromTransaction(
+          transactionList,
+          etherscanInfo,
+          nickname,
+          chain
+        );
 
-          const transactionUiUrl = getTransactionUiUrlFromHash(
-            etherscanInfo.uiUrl,
-            hash
-          );
+      pushArray(allTimelockTransactionsSinceStartBlock, transactionUrls);
 
-          const timelockTransactionDisplayInfo: TimelockTransactionDisplayInfo =
-            {
-              transactionUiUrl,
-              timelockNickname: nickname,
-              chainId: chain,
-              blockNumber,
-              timeStamp,
-              from,
-            };
-          return timelockTransactionDisplayInfo;
-        });
-
-      pushAll(allTimelockTransactionsSinceStartBlock, transactionUrls);
+      // done with work on a particular timelock
     }
-  }
-};
 
-const pushAll = <T>(src: T[], toAdd: T[]) => {
-  for (const elt of toAdd) {
-    src.push(elt);
+    // done with work on all timelocks
+
+    // sort all transactions
+    const sortedTransactions: TimelockTransactionDisplayInfo[] =
+      allTimelockTransactionsSinceStartBlock.sort((first, second) => {
+        const ret = parseInt(first.timeStamp) - parseInt(second.timeStamp);
+        return ret;
+      });
   }
+
+  // now have all transactions, sort by timestamp
 };
