@@ -6,7 +6,7 @@ export const getTransactionList = async (
   startBlock: number,
   etherscanInfo: EtherscanInfo
 ) => {
-  const { url, apiToken } = etherscanInfo;
+  const { apiUrl: url, apiToken } = etherscanInfo;
   const apiRoute = `/api?module=account&action=txlist&address=${address}&startblock=${startBlock}&sort=asc&apikey=${apiToken}`;
   const fullUrl = `${url}${apiRoute}`;
   const resp = await fetch(fullUrl);
