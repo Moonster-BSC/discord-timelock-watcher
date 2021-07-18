@@ -1,14 +1,12 @@
 import { ChainId } from "blockchain-addressbook";
+import { SupportedChainId } from "../types";
 
-interface EtherscanInfo {
+export interface EtherscanInfo {
   url: string;
   apiToken?: string;
 }
 
-export const etherscanApiUrlMap: Record<
-  Exclude<ChainId, ChainId.avax>,
-  EtherscanInfo
-> = {
+export const etherscanApiUrlMap: Record<SupportedChainId, EtherscanInfo> = {
   [ChainId.bsc]: {
     url: "https://api.bscscan.com",
     apiToken: "",

@@ -3,12 +3,37 @@
 /* STATE VARIABLES */
 
 import { TimelockInfo } from "../types/timelockInfo";
+import { addressBook, ChainId } from "blockchain-addressbook";
+import { SupportedChainId } from "../types";
+const {
+  polygon: {
+    platforms: { polypup, polypupBone },
+  },
+} = addressBook;
 
 // This is the block count at which the driver's last run used.
 let blockIndex = 0;
 
 // map of timelocks to track. Nickname to address map. Comes with some defaults, for testing
-const timelockNicknameToTimelockInfoMap: Record<string, TimelockInfo> = {};
+const timelockMap: Record<SupportedChainId, Record<string, TimelockInfo>> = {
+  [ChainId.polygon]: {
+    polypup: {
+      nickname: "polypup",
+      address: polypup.timelock,
+      chainId: ChainId.polygon,
+      isActivelyWatched: true,
+    },
+    polypupBone: {
+      nickname: "polypupBone",
+      address: polypupBone.timelock,
+      chainId: ChainId.polygon,
+      isActivelyWatched: true,
+    },
+  },
+  [ChainId.bsc]: {},
+  [ChainId.fantom]: {},
+  [ChainId.heco]: {},
+};
 
 /* STATE MODIFIERS */
 
@@ -22,9 +47,12 @@ export const setBlockIndex = (newIndex: number): void => {
 };
 
 export const addTimelockToMap = (timelock: TimelockInfo): void => {
-  timelockNicknameToTimelockInfoMap[timelock.nickname] = timelock;
+  timelockMap[timelock.chainId][timelock.nickname] = timelock;
 };
 
-export const removeTimelock = (nickName: string): void => {
-  delete timelockNicknameToTimelockInfoMap[nickName];
+export const removeTimelock = (
+  chainId: SupportedChainId,
+  nickName: string
+): void => {
+  delete timelockMap[chainId][nickName];
 };
