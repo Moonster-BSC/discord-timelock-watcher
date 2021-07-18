@@ -1,5 +1,5 @@
 import Discord from "discord.js";
-import { messageEventHandler } from "./eventsHandlers/messageEventHandler";
+import { messageEventHandler } from "./eventsHandlers/messageEventHandler/messageEventHandler";
 const bot = new Discord.Client();
 
 export type BotEvents = Extract<keyof Discord.ClientEvents, "message">;
