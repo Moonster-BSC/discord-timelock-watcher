@@ -20,7 +20,8 @@ import {
 } from "../state/state";
 import { Transaction } from "../types/etherscanApi/ListAccountTransactionsResponse";
 import { TimelockStateInfo } from "../types/timelockStateInfo";
-import { getTransactionEtherscanUrlFromHash } from "./getTransactionEtherscanUrlFromHash";
+import { TimelockTransactionDisplayInfo } from "../types/timelockTransactionDisplayInfo";
+import { getTransactionEtherscanUrlFromHash as getTransactionUiUrlFromHash } from "./getTransactionUiUrlFromHash";
 
 const intervalInHoursOptions = 1 | 2 | 4;
 
@@ -37,7 +38,8 @@ const driver = async () => {
   const startBlock = getBlockIndex();
 
   // output state
-  const allTimelockTransactionsSinceStartBlock: string[] = [];
+  const allTimelockTransactionsSinceStartBlock: TimelockTransactionDisplayInfo[] =
+    [];
 
   for (const chain of trackedChains) {
     console.log(`Analyzing chain ${chain.toString()}`);
@@ -71,14 +73,34 @@ const driver = async () => {
       }
 
       // 2. Build scanurls to see transaction
-      const transactionUrls = transactionList.map((tx) => {
-        const { hash } = tx;
-        const transactionEtherscanUrl = getTransactionEtherscanUrlFromHash(
-          etherscanInfo.uiUrl,
-          hash
-        );
-        return transactionEtherscanUrl;
-      });
+      const transactionUrls: TimelockTransactionDisplayInfo[] =
+        transactionList.map((tx) => {
+          const { hash, blockNumber, timeStamp, from } = tx;
+
+          const transactionUiUrl = getTransactionUiUrlFromHash(
+            etherscanInfo.uiUrl,
+            hash
+          );
+
+          const timelockTransactionDisplayInfo: TimelockTransactionDisplayInfo =
+            {
+              transactionUiUrl,
+              timelockNickname: nickname,
+              chainId: chain,
+              blockNumber,
+              timeStamp,
+              from,
+            };
+          return timelockTransactionDisplayInfo;
+        });
+
+      pushAll(allTimelockTransactionsSinceStartBlock, transactionUrls);
     }
+  }
+};
+
+const pushAll = <T>(src: T[], toAdd: T[]) => {
+  for (const elt of toAdd) {
+    src.push(elt);
   }
 };

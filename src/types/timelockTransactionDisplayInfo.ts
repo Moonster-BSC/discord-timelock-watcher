@@ -8,7 +8,7 @@ type TransactionPropertiesToDisplay = Pick<
 
 export interface TimelockTransactionDisplayInfo
   extends TransactionPropertiesToDisplay {
-  etherscanTransactionUrl: string;
+  transactionUiUrl: string;
   timelockNickname: string;
   chainId: SupportedChainId;
 }
