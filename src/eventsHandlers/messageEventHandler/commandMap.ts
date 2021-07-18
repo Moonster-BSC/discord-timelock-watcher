@@ -1,4 +1,4 @@
-enum BotCommands {
+export enum BotCommands {
   AddTimelock = "!add",
   RemoveTimelock = "!remove",
   ActivateChain = "!activate",
