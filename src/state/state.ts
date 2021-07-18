@@ -11,8 +11,14 @@ const {
 
 /* STATE VARIABLES */
 
+// is main driver running
+let isRunning = true;
+
 // This is the block count at which the driver's last run used.
 let blockIndex = 0;
+
+// interval at which bot will check for new transactions, in hours
+const pollingInterval = 1;
 
 // Which chains is the bot currently tracking
 const isChainTrackedMap: Record<SupportedChainId, boolean> = {
@@ -49,8 +55,16 @@ const timelockMap: Record<
 
 /* STATE GETTERS */
 
+export const getIsRunning = (): boolean => {
+  return isRunning;
+};
+
 export const getBlockIndex = (): number => {
   return blockIndex;
+};
+
+export const getPollingInterval = (): number => {
+  return pollingInterval;
 };
 
 export const getTimelockMap = (): typeof timelockMap => {
@@ -74,7 +88,7 @@ export const getTrackedChains = (): SupportedChainId[] => {
 
 /*  STATE MODIFIERS */
 
-// not async safe rn
+// none are async safe rn
 export const setBlockIndex = (newIndex: number): void => {
   blockIndex = newIndex;
 };
@@ -95,4 +109,8 @@ export const setIsChainTrackedMap = (
   newValue: boolean
 ): void => {
   isChainTrackedMap[chainId] = newValue;
+};
+
+export const setIsRunning = (newState: boolean): void => {
+  isRunning = newState;
 };
