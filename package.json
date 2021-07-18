@@ -8,6 +8,7 @@
     "tsc": "tsc"
   },
   "dependencies": {
+    "@types/jest": "^26.0.24",
     "blockchain-addressbook": "^0.1.112",
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0",
@@ -22,6 +23,8 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-prettier": "^3.4.0",
-    "prettier": "^2.3.2"
+    "jest": "^27.0.6",
+    "prettier": "^2.3.2",
+    "ts-jest": "^27.0.3"
   }
 }
