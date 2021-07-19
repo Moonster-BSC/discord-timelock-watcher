@@ -16,6 +16,8 @@ export const driver = async (channel: TextChannel): Promise<void> => {
 export const loop = async (channel: TextChannel): Promise<void> => {
   const transactions = await getTimelockTransactionsSinceStartBlockAsc();
   notifyOfTimelockTransactions(channel, transactions);
+  // TODO: get current block via api
+  State.setBlockIndex(0);
 };
 
 const sleep = async (hours: number) => {

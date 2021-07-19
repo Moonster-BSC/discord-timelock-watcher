@@ -8,7 +8,7 @@ Every `intervalInHours`, for every chain, for every timelock
 3. Push transaction object to global array
 4. Sort global array
 5. For each entry in array, send message to channel informing of transaction
-
+6. Increment block index
 */
 
 import { getTransactionList } from "../../data/api";
