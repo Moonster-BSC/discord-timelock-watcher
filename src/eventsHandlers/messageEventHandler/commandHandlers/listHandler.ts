@@ -29,6 +29,8 @@ export const listHandler = (
   channel.send(timelockListMessage);
 };
 
+// helpers
+
 const buildMessageFromTimelockInfo = (info: TimelockStateInfo) => {
   const { nickname, address } = info;
   const message = `

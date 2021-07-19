@@ -1,7 +1,9 @@
+import Discord from "discord.js";
+
 import { MessageArgumentReader } from "discord-command-parser";
 import { activateChainHandler } from "./commandHandlers/activateChainHandler";
 import { addTimelockHandler } from "./commandHandlers/addTimelockHandler";
-import { haltHandler } from "./commandHandlers/haltHandler";
+import { stopHandler } from "./commandHandlers/stopHandler";
 import { listHandler } from "./commandHandlers/listHandler";
 import { pauseChainHandler } from "./commandHandlers/pauseChainHandler";
 import { removeTimelockHandler } from "./commandHandlers/removeTimelockHandler";
@@ -12,12 +14,15 @@ export enum BotCommands {
   RemoveTimelock = "remove",
   ActivateChain = "activate",
   PauseChain = "pause",
-  Halt = "halt",
+  Stop = "stop",
   Start = "start",
   List = "list",
 }
 
-type BotCommandHandler = (reader: MessageArgumentReader) => void;
+type BotCommandHandler = (
+  reader: MessageArgumentReader,
+  channel: Discord.TextChannel
+) => void;
 
 // any is really for any commandHandler function
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -26,7 +31,7 @@ export const commandMap: Record<BotCommands, BotCommandHandler> = {
   [BotCommands.RemoveTimelock]: removeTimelockHandler,
   [BotCommands.ActivateChain]: activateChainHandler,
   [BotCommands.PauseChain]: pauseChainHandler,
-  [BotCommands.Halt]: haltHandler,
+  [BotCommands.Stop]: stopHandler,
   [BotCommands.Start]: startHandler,
   [BotCommands.List]: listHandler,
 };

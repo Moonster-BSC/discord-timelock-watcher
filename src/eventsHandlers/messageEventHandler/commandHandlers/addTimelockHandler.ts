@@ -1,10 +1,15 @@
+import Discord from "discord.js";
+
 import { ChainId } from "blockchain-addressbook";
 import { MessageArgumentReader } from "discord-command-parser";
 import { addTimelockToMap } from "../../../state/state";
 import { SupportedChainId } from "../../../types";
 import { TimelockStateInfo } from "../../../types/timelockStateInfo";
 
-export const addTimelockHandler = (reader: MessageArgumentReader): void => {
+export const addTimelockHandler = (
+  reader: MessageArgumentReader,
+  channel: Discord.TextChannel
+): void => {
   // format is !add <name> <address> <chainid> Chain id is nickname, not number
   const nickname = reader.getString();
   const address = reader.getString();
@@ -28,4 +33,7 @@ export const addTimelockHandler = (reader: MessageArgumentReader): void => {
   };
 
   addTimelockToMap(timelockToTrack);
+
+  const successMessage = `Tracking ${nickname} on ${chainId.toString()}`;
+  channel.send(successMessage);
 };

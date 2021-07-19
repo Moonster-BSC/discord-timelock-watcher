@@ -1,9 +1,14 @@
+import Discord from "discord.js";
+
 import { ChainId } from "blockchain-addressbook";
 import { MessageArgumentReader } from "discord-command-parser";
 import { removeTimelock } from "../../../state/state";
 import { SupportedChainId } from "../../../types";
 
-export const removeTimelockHandler = (reader: MessageArgumentReader): void => {
+export const removeTimelockHandler = (
+  reader: MessageArgumentReader,
+  channel: Discord.TextChannel
+): void => {
   // format is !remove <name> <chainid> Chain id is nickname, not number
   const nickname = reader.getString();
   const chainId = reader.getString();
@@ -14,4 +19,7 @@ export const removeTimelockHandler = (reader: MessageArgumentReader): void => {
   }
 
   removeTimelock(chainId as unknown as SupportedChainId, nickname);
+
+  const successMessage = `Removed ${nickname} on ${chainId.toString()}`;
+  channel.send(successMessage);
 };
