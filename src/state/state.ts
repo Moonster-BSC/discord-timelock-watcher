@@ -2,7 +2,7 @@
 
 import { TimelockStateInfo } from "../types/timelockStateInfo";
 import { addressBook, ChainId } from "blockchain-addressbook";
-import { SupportedChainId } from "../types";
+import { SupportedChainId } from "../types/supportedChains";
 const {
   polygon: {
     platforms: { polypup, polypupBone },
@@ -23,7 +23,7 @@ let pollingInterval = 1;
 // Which chains is the bot currently tracking
 const isChainTrackedMap: Record<SupportedChainId, boolean> = {
   // these are default values
-  [ChainId.polygon]: true,
+  [ChainId.polygon.toString()]: true,
   [ChainId.bsc]: false,
   [ChainId.fantom]: false,
   [ChainId.heco]: false,
@@ -89,7 +89,7 @@ export const getTrackedChains = (): SupportedChainId[] => {
 export const listChainTimelocks = (
   chainId: SupportedChainId
 ): TimelockStateInfo[] => {
-  const chainTimelocks = timelockMap[chainId];
+  const chainTimelocks = timelockMap[ChainId[chainId]];
   const chainTimelockList = Object.values(chainTimelocks);
   return chainTimelockList;
 };
