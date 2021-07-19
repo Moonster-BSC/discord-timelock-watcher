@@ -5,6 +5,7 @@
   "repository": "https://github.com/Moonster-BSC/discord-timelock-watcher.git",
   "license": "MIT",
   "scripts": {
+    "start": "ts-node src/bot.ts",
     "test": "jest",
     "tsc": "tsc"
   },
