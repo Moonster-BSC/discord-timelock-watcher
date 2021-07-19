@@ -4,7 +4,7 @@ import { removeTimelock } from "../../../state/state";
 import { SupportedChainId } from "../../../types";
 
 export const removeTimelockHandler = (reader: MessageArgumentReader): void => {
-  // format is !add <name> <address> <chainid> Chain id is nickname, not number
+  // format is !remove <name> <chainid> Chain id is nickname, not number
   const nickname = reader.getString();
   const chainId = reader.getString();
 

@@ -104,7 +104,7 @@ export const removeTimelock = (
   delete timelockMap[chainId][nickName];
 };
 
-export const setIsChainTrackedMap = (
+export const setIsChainTracked = (
   chainId: SupportedChainId,
   newValue: boolean
 ): void => {
