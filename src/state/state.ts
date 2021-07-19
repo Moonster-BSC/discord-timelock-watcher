@@ -2,7 +2,7 @@
 
 import { TimelockStateInfo } from "../types/timelockStateInfo";
 import { addressBook, ChainId } from "blockchain-addressbook";
-import { SupportedChainId } from "../types/supportedChains";
+import { SupportedChainId, supportedChains } from "../types/supportedChains";
 const {
   polygon: {
     platforms: { polypup, polypupBone },
@@ -23,10 +23,10 @@ let pollingInterval = 1;
 // Which chains is the bot currently tracking
 const isChainTrackedMap: Record<SupportedChainId, boolean> = {
   // these are default values
-  [ChainId.polygon.toString()]: true,
-  [ChainId.bsc]: false,
-  [ChainId.fantom]: false,
-  [ChainId.heco]: false,
+  [supportedChains.polygon]: true,
+  [supportedChains.bsc]: false,
+  [supportedChains.heco]: false,
+  [supportedChains.fantom]: false,
 };
 
 // map of timelocks to track. Nickname to address map. Comes with some defaults, for testing
@@ -34,23 +34,23 @@ const timelockMap: Record<
   SupportedChainId,
   Record<string, TimelockStateInfo>
 > = {
-  [ChainId.polygon]: {
+  [supportedChains.polygon]: {
     polypup: {
       nickname: "polypup",
       address: polypup.timelock,
-      chainId: ChainId.polygon,
+      chainId: supportedChains.polygon,
       isActivelyWatched: true,
     },
     polypupBone: {
       nickname: "polypupBone",
       address: polypupBone.timelock,
-      chainId: ChainId.polygon,
+      chainId: supportedChains.polygon,
       isActivelyWatched: true,
     },
   },
-  [ChainId.bsc]: {},
-  [ChainId.fantom]: {},
-  [ChainId.heco]: {},
+  [supportedChains.bsc]: {},
+  [supportedChains.fantom]: {},
+  [supportedChains.heco]: {},
 };
 
 /* STATE GETTERS */
@@ -89,7 +89,7 @@ export const getTrackedChains = (): SupportedChainId[] => {
 export const listChainTimelocks = (
   chainId: SupportedChainId
 ): TimelockStateInfo[] => {
-  const chainTimelocks = timelockMap[ChainId[chainId]];
+  const chainTimelocks = timelockMap[chainId];
   const chainTimelockList = Object.values(chainTimelocks);
   return chainTimelockList;
 };

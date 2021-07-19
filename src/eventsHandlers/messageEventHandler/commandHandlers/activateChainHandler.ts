@@ -3,8 +3,8 @@ import Discord from "discord.js";
 import { ChainId } from "blockchain-addressbook";
 import { MessageArgumentReader } from "discord-command-parser";
 import { setIsChainTracked } from "../../../state/state";
-import { SupportedChainId } from "../../../types";
 import { BotCommandHandler } from "../commandMap";
+import { SupportedChainId } from "../../../types/supportedChains";
 
 export const activateChainHandler: BotCommandHandler = (
   reader: MessageArgumentReader,
@@ -18,7 +18,7 @@ export const activateChainHandler: BotCommandHandler = (
     return;
   }
 
-  setIsChainTracked(chainId as unknown as SupportedChainId, true);
+  setIsChainTracked(chainId as SupportedChainId, true);
 
   const message = `Started tracking chain: ${chainId}`;
   channel.send(message);

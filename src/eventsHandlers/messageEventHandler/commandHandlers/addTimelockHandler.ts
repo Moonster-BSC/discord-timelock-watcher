@@ -3,8 +3,8 @@ import Discord from "discord.js";
 import { ChainId } from "blockchain-addressbook";
 import { MessageArgumentReader } from "discord-command-parser";
 import { addTimelockToMap } from "../../../state/state";
-import { SupportedChainId } from "../../../types";
 import { TimelockStateInfo } from "../../../types/timelockStateInfo";
+import { SupportedChainId } from "../../../types/supportedChains";
 
 export const addTimelockHandler = (
   reader: MessageArgumentReader,
@@ -28,7 +28,7 @@ export const addTimelockHandler = (
   const timelockToTrack: TimelockStateInfo = {
     nickname,
     address,
-    chainId: chainId as unknown as SupportedChainId, // due to missing SupportedChainId map, need to cast to unknown here
+    chainId: chainId as SupportedChainId, // due to missing SupportedChainId map, need to cast to unknown here
     isActivelyWatched: true,
   };
 

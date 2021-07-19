@@ -1,6 +1,6 @@
 import { EtherscanInfo } from "../../data/etherscanApiUrlMap";
-import { SupportedChainId } from "../../types";
 import { Transaction } from "../../types/etherscanApi/ListAccountTransactionsResponse";
+import { SupportedChainId } from "../../types/supportedChains";
 import { TimelockTransactionDisplayInfo } from "../../types/timelockTransactionDisplayInfo";
 
 export const buildTimelockTransactionDisplayInfoFromTransaction = (

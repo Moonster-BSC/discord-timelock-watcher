@@ -1,4 +1,3 @@
-import { ChainId } from "blockchain-addressbook";
 import { TimelockTransactionDisplayInfo } from "../../types/timelockTransactionDisplayInfo";
 
 const buildStringMessageFromDisplayInfo = (
@@ -14,7 +13,7 @@ const buildStringMessageFromDisplayInfo = (
   } = timelockTransactionDisplayInfo;
 
   const message = `
-        A transaction from **${timelockNickname}** on ${ChainId[chainId]} has appeared...
+        A transaction from **${timelockNickname}** on ${chainId} has appeared...
 
         Transaction Url: ${transactionUiUrl}
         Block: ${blockNumber}

@@ -1,9 +1,11 @@
 import Discord from "discord.js";
 
-import { ChainId } from "blockchain-addressbook";
 import { MessageArgumentReader } from "discord-command-parser";
 import { setIsChainTracked } from "../../../state/state";
-import { SupportedChainId } from "../../../types";
+import {
+  SupportedChainId,
+  supportedChains,
+} from "../../../types/supportedChains";
 
 export const pauseChainHandler = (
   reader: MessageArgumentReader,
@@ -13,11 +15,11 @@ export const pauseChainHandler = (
   const chainId = reader.getString();
 
   // should be chainId in a supported chain id map, but this doesn't exist yet.
-  if (chainId === null || chainId in ChainId === false) {
+  if (chainId === null || chainId in supportedChains === false) {
     return;
   }
 
-  setIsChainTracked(chainId as unknown as SupportedChainId, false);
+  setIsChainTracked(chainId as SupportedChainId, false);
 
   const message = `Paused tracking of chain: ${chainId.toString()}`;
   channel.send(message);

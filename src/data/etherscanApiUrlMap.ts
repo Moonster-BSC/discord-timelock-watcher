@@ -1,5 +1,4 @@
-import { ChainId } from "blockchain-addressbook";
-import { SupportedChainId } from "../types";
+import { SupportedChainId } from "../types/supportedChains";
 
 export interface EtherscanInfo {
   uiUrl: string;
@@ -8,21 +7,21 @@ export interface EtherscanInfo {
 }
 
 export const etherscanApiUrlMap: Record<SupportedChainId, EtherscanInfo> = {
-  [ChainId.bsc]: {
+  bsc: {
     uiUrl: "",
     apiUrl: "https://api.bscscan.com",
     apiToken: "",
   },
-  [ChainId.polygon]: {
+  polygon: {
     uiUrl: "polygonscan.com",
     apiUrl: "https://api.polygonscan.com",
   },
-  [ChainId.fantom]: {
+  fantom: {
     uiUrl: "",
     apiUrl: "https://api.ftmscan.com",
     apiToken: "",
   },
-  [ChainId.heco]: {
+  heco: {
     uiUrl: "",
     apiUrl: "https://api.hecoinfo.com",
     apiToken: "",

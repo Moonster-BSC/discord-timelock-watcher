@@ -1,10 +1,12 @@
 import Discord from "discord.js";
 
-import { ChainId } from "blockchain-addressbook";
 import { MessageArgumentReader } from "discord-command-parser";
 import { listChainTimelocks } from "../../../state/state";
-import { SupportedChainId } from "../../../types";
 import { TimelockStateInfo } from "../../../types/timelockStateInfo";
+import {
+  SupportedChainId,
+  supportedChains,
+} from "../../../types/supportedChains";
 
 export const listHandler = (
   reader: MessageArgumentReader,
@@ -14,13 +16,11 @@ export const listHandler = (
   const chainId = reader.getString();
 
   // should be chainId in a supported chain id map, but this doesn't exist yet.
-  if (chainId === null || chainId in ChainId === false) {
+  if (chainId === null || chainId in supportedChains === false) {
     return;
   }
 
-  const timelockInfoList = listChainTimelocks(
-    chainId as unknown as SupportedChainId
-  );
+  const timelockInfoList = listChainTimelocks(chainId as SupportedChainId);
 
   const timelockListMessage: string =
     buildMessagesFromTimelockInfo(timelockInfoList);

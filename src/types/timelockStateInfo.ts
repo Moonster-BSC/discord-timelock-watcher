@@ -1,4 +1,4 @@
-import { SupportedChainId } from ".";
+import { SupportedChainId } from "./supportedChains";
 
 export interface TimelockStateInfo {
   // normalized, wonder if needed though

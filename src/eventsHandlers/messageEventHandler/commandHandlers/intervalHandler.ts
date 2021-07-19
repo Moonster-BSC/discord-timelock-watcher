@@ -1,7 +1,7 @@
 import Discord from "discord.js";
 
 import { MessageArgumentReader } from "discord-command-parser";
-import { getPollingInterval } from "../../../state/state";
+import { getPollingInterval, setPollingInterval } from "../../../state/state";
 
 export const setIntervalHandler = (
   reader: MessageArgumentReader,
@@ -10,12 +10,11 @@ export const setIntervalHandler = (
   // format is !interval <number in hours>
   const interval = reader.getInt();
 
-  // should be chainId in a supported chain id map, but this doesn't exist yet.
-  if (interval) {
+  if (!interval) {
     return;
   }
 
-  getPollingInterval;
+  setPollingInterval(interval);
 
   const message = `Set refresh interval to ${interval}`;
   channel.send(message);

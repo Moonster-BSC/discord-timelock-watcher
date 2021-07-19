@@ -1,5 +1,5 @@
-import { SupportedChainId } from ".";
 import { Transaction } from "./etherscanApi/ListAccountTransactionsResponse";
+import { SupportedChainId } from "./supportedChains";
 
 type TransactionPropertiesToDisplay = Pick<
   Transaction,
