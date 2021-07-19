@@ -10,7 +10,12 @@ const parserOptions: ParserOptions = {
 
 const commandPrefix = "!";
 
+// toto get spy role id
+const spyRoleId = "123456789";
+
 export const messageEventHandler = (message: Discord.Message): void => {
+  // TODO: check role
+
   const parsed: ParsedMessage<Discord.Message> = parse(
     message,
     commandPrefix,
