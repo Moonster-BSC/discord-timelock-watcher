@@ -8,6 +8,7 @@ import { listHandler } from "./commandHandlers/listHandler";
 import { pauseChainHandler } from "./commandHandlers/pauseChainHandler";
 import { removeTimelockHandler } from "./commandHandlers/removeTimelockHandler";
 import { startHandler } from "./commandHandlers/startHandler";
+import { blockHandler } from "./commandHandlers/blockHandler";
 
 export enum BotCommands {
   AddTimelock = "add",
@@ -17,6 +18,7 @@ export enum BotCommands {
   Stop = "stop",
   Start = "start",
   List = "list",
+  Block = "block",
 }
 
 export type BotCommandHandler = (
@@ -34,4 +36,5 @@ export const commandMap: Record<BotCommands, BotCommandHandler> = {
   [BotCommands.Stop]: stopHandler,
   [BotCommands.Start]: startHandler,
   [BotCommands.List]: listHandler,
+  [BotCommands.Block]: blockHandler,
 };
