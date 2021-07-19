@@ -18,7 +18,7 @@ let isRunning = true;
 let blockIndex = 0;
 
 // interval at which bot will check for new transactions, in hours
-const pollingInterval = 1;
+let pollingInterval = 1;
 
 // Which chains is the bot currently tracking
 const isChainTrackedMap: Record<SupportedChainId, boolean> = {
@@ -98,10 +98,21 @@ export const listChainTimelocks = (
 
 // none are async safe rn
 export const setBlockIndex = (newIndex: number): void => {
+  console.log(`Setting block index to ${newIndex}`);
   blockIndex = newIndex;
 };
 
+export const setPollingInterval = (newInterval: number): void => {
+  console.log(`Updating polling interval to ${newInterval}`);
+  pollingInterval = newInterval;
+};
+
 export const addTimelockToMap = (timelock: TimelockStateInfo): void => {
+  console.log(
+    `Adding timelock: ${timelock.nickname} on chainId: ${
+      ChainId[timelock.chainId]
+    }`
+  );
   timelockMap[timelock.chainId][timelock.nickname] = timelock;
 };
 
@@ -109,6 +120,7 @@ export const removeTimelock = (
   chainId: SupportedChainId,
   nickName: string
 ): void => {
+  console.log(`Removing timelock: ${nickName} on chainId: ${ChainId[chainId]}`);
   delete timelockMap[chainId][nickName];
 };
 
@@ -116,9 +128,11 @@ export const setIsChainTracked = (
   chainId: SupportedChainId,
   newValue: boolean
 ): void => {
+  console.log(`Tracking ${ChainId[chainId]}`);
   isChainTrackedMap[chainId] = newValue;
 };
 
 export const setIsRunning = (newState: boolean): void => {
+  console.log(`Bot is ${newState ? "running" : "stopped"}`);
   isRunning = newState;
 };

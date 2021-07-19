@@ -9,6 +9,10 @@ import { pauseChainHandler } from "./commandHandlers/pauseChainHandler";
 import { removeTimelockHandler } from "./commandHandlers/removeTimelockHandler";
 import { startHandler } from "./commandHandlers/startHandler";
 import { blockHandler } from "./commandHandlers/blockHandler";
+import {
+  setIntervalHandler,
+  getIntervalHandler,
+} from "./commandHandlers/intervalHandler";
 
 export enum BotCommands {
   AddTimelock = "add",
@@ -19,6 +23,8 @@ export enum BotCommands {
   Start = "start",
   List = "list",
   Block = "block",
+  Interval = "interval",
+  UpdateInterval = "updateInterval",
 }
 
 export type BotCommandHandler = (
@@ -37,4 +43,6 @@ export const commandMap: Record<BotCommands, BotCommandHandler> = {
   [BotCommands.Start]: startHandler,
   [BotCommands.List]: listHandler,
   [BotCommands.Block]: blockHandler,
+  [BotCommands.Interval]: setIntervalHandler,
+  [BotCommands.UpdateInterval]: getIntervalHandler,
 };
