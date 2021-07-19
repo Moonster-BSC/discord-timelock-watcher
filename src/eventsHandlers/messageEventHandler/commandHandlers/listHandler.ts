@@ -14,7 +14,7 @@ export const listHandler = (
   const chainId = reader.getString();
 
   // should be chainId in a supported chain id map, but this doesn't exist yet.
-  if (chainId === null || chainId in ChainId === false) {
+  if (chainId === null || chainId in Object.keys(ChainId) === false) {
     return;
   }
 

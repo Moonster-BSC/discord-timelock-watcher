@@ -20,7 +20,7 @@ export const addTimelockHandler = (
     nickname === null ||
     address === null ||
     chainId === null ||
-    chainId in ChainId === false
+    chainId in Object.keys(ChainId) === false
   ) {
     return;
   }
@@ -34,6 +34,6 @@ export const addTimelockHandler = (
 
   addTimelockToMap(timelockToTrack);
 
-  const successMessage = `Tracking timelock: ${nickname} on chain: ${chainId.toString()}`;
+  const successMessage = `Tracking timelock: ${nickname} on chain: ${chainId}`;
   channel.send(successMessage);
 };
