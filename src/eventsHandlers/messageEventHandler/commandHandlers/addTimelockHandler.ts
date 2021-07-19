@@ -20,7 +20,7 @@ export const addTimelockHandler = (
     nickname === null ||
     address === null ||
     chainId === null ||
-    chainId in Object.keys(ChainId) === false
+    chainId in ChainId === false
   ) {
     return;
   }

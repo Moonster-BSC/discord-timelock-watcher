@@ -14,11 +14,7 @@ export const removeTimelockHandler = (
   const chainId = reader.getString();
 
   // should be chainId in a supported chain id map, but this doesn't exist yet.
-  if (
-    nickname === null ||
-    chainId === null ||
-    chainId in Object.keys(ChainId) === false
-  ) {
+  if (nickname === null || chainId === null || chainId in ChainId === false) {
     return;
   }
 
