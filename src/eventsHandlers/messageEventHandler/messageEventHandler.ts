@@ -1,9 +1,31 @@
+import { parse, ParsedMessage, ParserOptions } from "discord-command-parser";
 import Discord from "discord.js";
+import { BotCommands, commandMap } from "./commandMap";
+
+const parserOptions: ParserOptions = {
+  allowBots: false,
+  allowSpaceBeforeCommand: true,
+  ignorePrefixCase: false,
+};
+
+const commandPrefix = "!";
 
 export const messageEventHandler = (message: Discord.Message) => {
-  if (message.content === "!loop") {
-    const interval = setInterval(function () {
-      message.channel.send("123");
-    }, 1 * 1000);
+  const parsed: ParsedMessage<Discord.Message> = parse(
+    message,
+    commandPrefix,
+    parserOptions
+  );
+
+  if (!parsed.success) return;
+
+  const { command, reader } = parsed;
+
+  // check which command
+
+  if (command in commandMap === false) {
+    return;
   }
+
+  const commandHandler = commandMap[command as BotCommands];
 };
