@@ -1,10 +1,15 @@
+import Discord from "discord.js";
+
 import { ChainId } from "blockchain-addressbook";
 import { MessageArgumentReader } from "discord-command-parser";
 import { listChainTimelocks } from "../../../state/state";
 import { SupportedChainId } from "../../../types";
 import { TimelockStateInfo } from "../../../types/timelockStateInfo";
 
-export const listHandler = (reader: MessageArgumentReader): void => {
+export const listHandler = (
+  reader: MessageArgumentReader,
+  channel: Discord.TextChannel
+): void => {
   // format is !list <chainid> Chain id is nickname, not number
   const chainId = reader.getString();
 
@@ -19,6 +24,9 @@ export const listHandler = (reader: MessageArgumentReader): void => {
 
   const timelockListMessage: string =
     buildMessagesFromTimelockInfo(timelockInfoList);
+
+  // careful, sending potentially long message to channel
+  channel.send(timelockListMessage);
 };
 
 const buildMessageFromTimelockInfo = (info: TimelockStateInfo) => {
