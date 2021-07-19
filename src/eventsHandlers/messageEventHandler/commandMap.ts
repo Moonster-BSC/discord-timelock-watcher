@@ -19,7 +19,7 @@ export enum BotCommands {
   List = "list",
 }
 
-type BotCommandHandler = (
+export type BotCommandHandler = (
   reader: MessageArgumentReader,
   channel: Discord.TextChannel
 ) => void;

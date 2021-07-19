@@ -19,6 +19,6 @@ export const pauseChainHandler = (
 
   setIsChainTracked(chainId as unknown as SupportedChainId, false);
 
-  const message = `Paused tracking of ${chainId.toString()}`;
+  const message = `Paused tracking of chain: ${chainId.toString()}`;
   channel.send(message);
 };

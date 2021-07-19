@@ -34,6 +34,6 @@ export const addTimelockHandler = (
 
   addTimelockToMap(timelockToTrack);
 
-  const successMessage = `Tracking ${nickname} on ${chainId.toString()}`;
+  const successMessage = `Tracking timelock: ${nickname} on chain: ${chainId.toString()}`;
   channel.send(successMessage);
 };

@@ -20,6 +20,6 @@ export const removeTimelockHandler = (
 
   removeTimelock(chainId as unknown as SupportedChainId, nickname);
 
-  const successMessage = `Removed ${nickname} on ${chainId.toString()}`;
+  const successMessage = `Removed timelock: ${nickname} on chain: ${chainId.toString()}`;
   channel.send(successMessage);
 };
