@@ -10,7 +10,7 @@ const parserOptions: ParserOptions = {
 
 const commandPrefix = "!";
 
-export const messageEventHandler = (message: Discord.Message) => {
+export const messageEventHandler = (message: Discord.Message): void => {
   const parsed: ParsedMessage<Discord.Message> = parse(
     message,
     commandPrefix,
@@ -28,4 +28,7 @@ export const messageEventHandler = (message: Discord.Message) => {
   }
 
   const commandHandler = commandMap[command as BotCommands];
+
+  // run command
+  commandHandler(reader, message.channel as Discord.TextChannel);
 };
