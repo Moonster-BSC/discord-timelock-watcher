@@ -9,12 +9,12 @@ export interface EtherscanInfo {
 
 export const etherscanApiUrlMap: Record<SupportedChainId, EtherscanInfo> = {
   [ChainId.bsc]: {
-    uiUrl: "polygonscan.com",
+    uiUrl: "",
     apiUrl: "https://api.bscscan.com",
     apiToken: "",
   },
   [ChainId.polygon]: {
-    uiUrl: "",
+    uiUrl: "polygonscan.com",
     apiUrl: "https://api.polygonscan.com",
   },
   [ChainId.fantom]: {

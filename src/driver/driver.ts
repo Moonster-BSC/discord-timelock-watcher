@@ -13,7 +13,7 @@ export const driver = async (channel: TextChannel): Promise<void> => {
   }
 };
 
-const loop = async (channel: TextChannel): Promise<void> => {
+export const loop = async (channel: TextChannel): Promise<void> => {
   const transactions = await getTimelockTransactionsSinceStartBlockAsc();
   notifyOfTimelockTransactions(channel, transactions);
 };
