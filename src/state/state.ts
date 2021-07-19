@@ -86,6 +86,14 @@ export const getTrackedChains = (): SupportedChainId[] => {
   return trackedChains;
 };
 
+export const listChainTimelocks = (
+  chainId: SupportedChainId
+): TimelockStateInfo[] => {
+  const chainTimelocks = timelockMap[chainId];
+  const chainTimelockList = Object.values(chainTimelocks);
+  return chainTimelockList;
+};
+
 /*  STATE MODIFIERS */
 
 // none are async safe rn
