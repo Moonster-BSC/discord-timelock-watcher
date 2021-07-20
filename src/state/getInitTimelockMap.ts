@@ -1,6 +1,6 @@
 import { supportedChains } from "../types/supportedChains";
 import { addressBook } from "blockchain-addressbook";
-import { TimelockMap } from "../types/TimelockMap";
+import { TimelockMap } from "../types/timelockMap";
 const {
   polygon: {
     platforms: { polypup, polypupBone },

@@ -1,4 +1,4 @@
-import { TimelockMap } from "../types/TimelockMap";
+import { TimelockMap } from "../types/timelockMap";
 import { promises as fs } from "fs";
 import { getIndex } from "../state/state";
 

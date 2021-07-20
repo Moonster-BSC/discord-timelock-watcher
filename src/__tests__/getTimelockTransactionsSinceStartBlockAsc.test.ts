@@ -3,8 +3,8 @@ import { getTimelockTransactionsInTimeRangeAsc } from "../driver/helpers/getTime
 import { getUtcSecondsFromDate } from "../driver/helpers/getUtcSecondsFromDate";
 import * as State from "../state/state";
 
-describe("getTimelockTransactionsSinceStartBlockAsc", () => {
-  test("Runs", async () => {
+xdescribe("getTimelockTransactionsSinceStartBlockAsc", () => {
+  xtest("Runs", async () => {
     const endBuffer = 60 * 10; // 10 min buffer
     const startTime = State.initIndex;
     const endTime = getUtcSecondsFromDate(new Date()) - endBuffer;

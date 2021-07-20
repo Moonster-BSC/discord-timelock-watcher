@@ -5,7 +5,7 @@ import { SupportedChainId, supportedChains } from "../types/supportedChains";
 import { getUtcSecondsFromDate } from "../driver/helpers/getUtcSecondsFromDate";
 import { ChainId } from "blockchain-addressbook";
 import { getInitTimelockMap } from "./getInitTimelockMap";
-import { TimelockMap } from "../types/TimelockMap";
+import { TimelockMap } from "../types/timelockMap";
 
 /* STATE VARIABLES */
 
