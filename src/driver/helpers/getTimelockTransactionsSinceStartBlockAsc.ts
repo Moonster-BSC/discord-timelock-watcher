@@ -32,10 +32,6 @@ export const getTimelockTransactionsInTimeRangeAsc = async (
   const timelockMap = getTimelockMap();
   const trackedChains = getTrackedChains();
 
-  // what should be passed in
-  // const startTime = getIndex();
-  // const endTime = Date.now();
-
   // output state
   const allTimelockTransactionsSinceStartBlock: TimelockTransactionDisplayInfo[] =
     [];

@@ -2,13 +2,13 @@ import { TextChannel } from "discord.js";
 import * as State from "../state/state";
 import { getIndex } from "../state/state";
 import { getTimelockTransactionsInTimeRangeAsc } from "./helpers/getTimelockTransactionsSinceStartBlockAsc";
+import { getUtcSecondsFromDate } from "./helpers/getUtcSecondsFromDate";
 import { notifyOfTimelockTransactions } from "./helpers/notifyOfTimelockTransactions";
 
 export const driver = async (channel: TextChannel): Promise<void> => {
   while (State.getIsRunning()) {
     const pollingInterval = State.getPollingInterval();
 
-    // Do we need to await?
     await loop(channel);
 
     await sleep(pollingInterval);
@@ -17,7 +17,7 @@ export const driver = async (channel: TextChannel): Promise<void> => {
 
 export const loop = async (channel: TextChannel): Promise<void> => {
   const startTime = getIndex();
-  const endTime = Date.now();
+  const endTime = getUtcSecondsFromDate(new Date());
   const transactions = await getTimelockTransactionsInTimeRangeAsc(
     startTime,
     endTime

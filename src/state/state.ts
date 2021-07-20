@@ -3,6 +3,7 @@
 import { TimelockStateInfo } from "../types/timelockStateInfo";
 import { addressBook, ChainId } from "blockchain-addressbook";
 import { SupportedChainId, supportedChains } from "../types/supportedChains";
+import { getUtcSecondsFromDate } from "../driver/helpers/getUtcSecondsFromDate";
 const {
   polygon: {
     platforms: { polypup, polypupBone },
@@ -16,9 +17,10 @@ let isRunning = false;
 
 // init starting timestamp to 3 weeks ago
 export const initTimeAgo = 60 * 60 * 24 * 7 * 3; // sec * min * hrs * days * 3 weeks
+const utcSecondsNow = getUtcSecondsFromDate(new Date());
 
 // timestamp index, in UTC seconds. Represents a snapshot timerange. At first, tried using blocks, but then realized would have to maintain one per chain. Easier to calculate it on the fly.
-let index = Date.now() - initTimeAgo;
+let index = utcSecondsNow - initTimeAgo;
 
 // interval at which bot will check for new transactions, in hours
 let pollingInterval = 1;
