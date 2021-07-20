@@ -23,7 +23,7 @@ export const initIndex = utcSecondsNow - initTimeAgo;
 // timestamp index, in UTC seconds. Represents a snapshot timerange. At first, tried using blocks, but then realized would have to maintain one per chain. Easier to calculate it on the fly.
 let index = initIndex;
 
-// interval at which bot will check for new transactions, in hours
+// interval at which bot will check for new transactions, units are minutes
 let pollingInterval = 1;
 
 // Which chains is the bot currently tracking

@@ -27,12 +27,12 @@ export const loop = async (channel: TextChannel): Promise<void> => {
   State.setIndex(endTime);
 };
 
-const sleep = async (hours: number) => {
-  const ms = hoursToMs(hours);
+const sleep = async (minutes: number) => {
+  const ms = minutesToMs(minutes);
   return new Promise((r) => setTimeout(r as any, ms));
 };
 
-const hoursToMs = (hours: number) => {
-  const ms = hours * 60 * 60 * 1000;
+const minutesToMs = (minutes: number) => {
+  const ms = minutes * 60 * 1000;
   return ms;
 };
