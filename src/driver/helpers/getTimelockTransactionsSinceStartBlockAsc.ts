@@ -27,13 +27,14 @@ import { TimelockTransactionDisplayInfo } from "../../types/timelockTransactionD
 import { buildTimelockTransactionDisplayInfoFromTransaction } from "./buildTimelockTransactionDisplayInfoFromTransaction";
 import { pushArray } from "./pushArray";
 
-export const getTimelockTransactionsSinceStartBlockAsc = async (): Promise<
+export const getTimelockTransactionsInBlockRangeAsc = async (): Promise<
   TimelockTransactionDisplayInfo[]
 > => {
   // global driver variables
   const timelockMap = getTimelockMap();
   const trackedChains = getTrackedChains();
   const startBlock = getBlockIndex();
+  const endBlock = 
 
   // output state
   const allTimelockTransactionsSinceStartBlock: TimelockTransactionDisplayInfo[] =
