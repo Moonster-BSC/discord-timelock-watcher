@@ -16,11 +16,12 @@ const {
 let isRunning = false;
 
 // init starting timestamp to 3 weeks ago
-export const initTimeAgo = 60 * 60 * 24 * 7 * 3; // sec * min * hrs * days * 3 weeks
+const initTimeAgo = 60 * 60 * 24 * 7 * 3; // sec * min * hrs * days * 3 weeks
 const utcSecondsNow = getUtcSecondsFromDate(new Date());
+export const initIndex = utcSecondsNow - initTimeAgo;
 
 // timestamp index, in UTC seconds. Represents a snapshot timerange. At first, tried using blocks, but then realized would have to maintain one per chain. Easier to calculate it on the fly.
-let index = utcSecondsNow - initTimeAgo;
+let index = initIndex;
 
 // interval at which bot will check for new transactions, in hours
 let pollingInterval = 1;
