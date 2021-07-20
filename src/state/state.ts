@@ -11,8 +11,8 @@ const {
 
 /* STATE VARIABLES */
 
-// is main driver running
-let isRunning = true;
+// is main driver running, needs to be manually started
+let isRunning = false;
 
 // init starting timestamp to 3 weeks ago
 export const initTimeAgo = 60 * 60 * 24 * 7 * 3; // sec * min * hrs * days * 3 weeks
