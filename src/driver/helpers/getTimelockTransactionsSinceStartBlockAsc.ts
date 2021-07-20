@@ -21,6 +21,7 @@ import { Transaction } from "../../types/etherscanApi/ListAccountTransactionsRes
 import { TimelockStateInfo } from "../../types/timelockStateInfo";
 import { TimelockTransactionDisplayInfo } from "../../types/timelockTransactionDisplayInfo";
 import { buildTimelockTransactionDisplayInfoFromTransaction } from "./buildTimelockTransactionDisplayInfoFromTransaction";
+import { getBlockFromEtherscan } from "./getLatestBlock";
 import { pushArray } from "./pushArray";
 
 export const getTimelockTransactionsInTimeRangeAsc = async (

@@ -1,16 +1,15 @@
-// const getUTCSeconds = (date: Date): number =>
-//   Math.floor(Number(date) / 1000);
+import fetch from "node-fetch";
+import { BlockResponse } from "../../types/etherscanApi/BlockResponse";
 
-// const getNowInUTCSeconds = () => Date.now()
-
-const getBlockFromEtherscan = async (
+export const getBlockFromEtherscan = async (
   scanUrl: string,
   timestamp: number,
   apiToken?: string
-) => {
+): Promise<number> => {
   const token = apiToken ? apiToken : "YourApiKeyToken";
   const url = `${scanUrl}/api?module=block&action=getblocknobytime&timestamp=${timestamp}&closest=after&apikey=${token}`;
   const resp = await fetch(url);
-  const json: BlockApiResponse = await resp.json();
-  return json.result;
+  const json: BlockResponse = await resp.json();
+  const block = parseInt(json.result);
+  return block;
 };
