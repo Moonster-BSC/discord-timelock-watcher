@@ -115,7 +115,8 @@ export const setIsChainTracked = (
   chainId: SupportedChainId,
   newValue: boolean
 ): void => {
-  console.log(`Tracking ${ChainId[chainId]}`);
+  const messagePrefix = newValue ? "Tracking" : "Stopped tracking";
+  console.log(`${messagePrefix} ${chainId}`);
   isChainTrackedMap[chainId] = newValue;
 };
 
