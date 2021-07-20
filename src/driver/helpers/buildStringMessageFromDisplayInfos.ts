@@ -12,14 +12,12 @@ const buildStringMessageFromDisplayInfo = (
     from,
   } = timelockTransactionDisplayInfo;
 
-  const message = `
-        A transaction from **${timelockNickname}** on ${chainId} has appeared...
+  const message = `A transaction from **${timelockNickname}** on ${chainId} has appeared...
 
-        Transaction Url: ${transactionUiUrl}
-        Block: ${blockNumber}
-        TimeStamp: ${timeStamp}
-        Transaction sender: ${from}
-    `;
+Transaction Url: ${transactionUiUrl}
+Block: ${blockNumber}
+TimeStamp: ${timeStamp}
+Transaction sender: ${from}`;
 
   return message;
 };
