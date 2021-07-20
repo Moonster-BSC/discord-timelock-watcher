@@ -16,7 +16,9 @@ const {
 let isRunning = false;
 
 // init starting timestamp to 3 weeks ago
-const initTimeAgo = 60 * 60 * 24 * 7 * 3; // sec * min * hrs * days * 3 weeks
+// const initTimeAgo = 60 * 60 * 24 * 7 * 3; // sec * min * hrs * days * 3 weeks
+const initTimeAgo = 60 * 60 * 24 * 1; // sec * min * hrs * 1 day
+
 const utcSecondsNow = getUtcSecondsFromDate(new Date());
 export const initIndex = utcSecondsNow - initTimeAgo;
 
@@ -24,7 +26,8 @@ export const initIndex = utcSecondsNow - initTimeAgo;
 let index = initIndex;
 
 // interval at which bot will check for new transactions, units are minutes
-let pollingInterval = 1;
+const oneHour = 1 * 60;
+let pollingInterval = oneHour;
 
 // Which chains is the bot currently tracking
 const isChainTrackedMap: Record<SupportedChainId, boolean> = {
@@ -50,6 +53,12 @@ const timelockMap: Record<
     polypupBone: {
       nickname: "polypupBone",
       address: polypupBone.timelock,
+      chainId: supportedChains.polygon,
+      isActivelyWatched: true,
+    },
+    xYeld: {
+      nickname: "xYeld",
+      address: "0x6a582111f1b9d5a579bae011948067a9a09e2d8b",
       chainId: supportedChains.polygon,
       isActivelyWatched: true,
     },
