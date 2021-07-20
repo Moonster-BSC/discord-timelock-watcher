@@ -34,6 +34,6 @@ export const getTransactionUiUrlFromHash = (
   scanUrl: string,
   txHash: string
 ): string => {
-  const txUrl = `${scanUrl}/tx/${txHash}`;
+  const txUrl = `https://${scanUrl}/tx/${txHash}`;
   return txUrl;
 };

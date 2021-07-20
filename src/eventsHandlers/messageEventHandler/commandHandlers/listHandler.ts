@@ -7,6 +7,8 @@ import {
   SupportedChainId,
   supportedChains,
 } from "../../../types/supportedChains";
+import { getAddressUiUrl } from "../../../driver/helpers/getAddressUiUrl";
+import { etherscanApiUrlMap } from "../../../data/etherscanApiUrlMap";
 
 export const listHandler = (
   reader: MessageArgumentReader,
@@ -32,9 +34,11 @@ export const listHandler = (
 // helpers
 
 const buildMessageFromTimelockInfo = (info: TimelockStateInfo) => {
-  const { nickname, address } = info;
+  const { nickname, address, chainId } = info;
+  const { uiUrl } = etherscanApiUrlMap[chainId];
+  const url = getAddressUiUrl(uiUrl, address);
   const message = `**${nickname}**
-address: ${address}`;
+${url}`;
   return message;
 };
 
