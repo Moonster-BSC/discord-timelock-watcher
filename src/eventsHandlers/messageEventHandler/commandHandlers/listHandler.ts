@@ -28,6 +28,7 @@ export const listHandler = (
     buildMessagesFromTimelockInfo(timelockInfoList);
 
   // careful, sending potentially long message to channel
+  // TODO: turn off embed due to links
   channel.send(timelockListMessage);
 };
 

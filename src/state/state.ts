@@ -1,4 +1,4 @@
-// State of the app. Used by main driver. Can be modified via bot commands
+// State of the app. Used by main driver. Can be modified via bot commands. State variables should be moved to db really
 
 import { TimelockStateInfo } from "../types/timelockStateInfo";
 import { addressBook, ChainId } from "blockchain-addressbook";
