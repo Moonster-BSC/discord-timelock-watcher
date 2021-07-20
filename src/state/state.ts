@@ -14,8 +14,11 @@ const {
 // is main driver running
 let isRunning = true;
 
-// This is the block count at which the driver's last run used.
-let blockIndex = 0;
+// init starting timestamp to 3 weeks ago
+export const initTimeAgo = 60 * 60 * 24 * 7 * 3; // sec * min * hrs * days * 3 weeks
+
+// timestamp index, in UTC seconds. Represents a snapshot timerange. At first, tried using blocks, but then realized would have to maintain one per chain. Easier to calculate it on the fly.
+let index = Date.now() - initTimeAgo;
 
 // interval at which bot will check for new transactions, in hours
 let pollingInterval = 1;
@@ -59,8 +62,8 @@ export const getIsRunning = (): boolean => {
   return isRunning;
 };
 
-export const getBlockIndex = (): number => {
-  return blockIndex;
+export const getIndex = (): number => {
+  return index;
 };
 
 export const getPollingInterval = (): number => {
@@ -97,9 +100,9 @@ export const listChainTimelocks = (
 /*  STATE MODIFIERS */
 
 // none are async safe rn
-export const setBlockIndex = (newIndex: number): void => {
-  console.log(`Setting block index to ${newIndex}`);
-  blockIndex = newIndex;
+export const setIndex = (newIndex: number): void => {
+  console.log(`Setting index to ${newIndex}`);
+  index = newIndex;
 };
 
 export const setPollingInterval = (newInterval: number): void => {

@@ -16,25 +16,24 @@ import {
   EtherscanInfo,
   etherscanApiUrlMap,
 } from "../../data/etherscanApiUrlMap";
-import {
-  getTimelockMap,
-  getTrackedChains,
-  getBlockIndex,
-} from "../../state/state";
+import { getTimelockMap, getTrackedChains } from "../../state/state";
 import { Transaction } from "../../types/etherscanApi/ListAccountTransactionsResponse";
 import { TimelockStateInfo } from "../../types/timelockStateInfo";
 import { TimelockTransactionDisplayInfo } from "../../types/timelockTransactionDisplayInfo";
 import { buildTimelockTransactionDisplayInfoFromTransaction } from "./buildTimelockTransactionDisplayInfoFromTransaction";
 import { pushArray } from "./pushArray";
 
-export const getTimelockTransactionsInBlockRangeAsc = async (): Promise<
-  TimelockTransactionDisplayInfo[]
-> => {
+export const getTimelockTransactionsInTimeRangeAsc = async (
+  startTime: number,
+  endTime: number
+): Promise<TimelockTransactionDisplayInfo[]> => {
   // global driver variables
   const timelockMap = getTimelockMap();
   const trackedChains = getTrackedChains();
-  const startBlock = getBlockIndex();
-  const endBlock = 
+
+  // what should be passed in
+  // const startTime = getIndex();
+  // const endTime = Date.now();
 
   // output state
   const allTimelockTransactionsSinceStartBlock: TimelockTransactionDisplayInfo[] =
@@ -46,6 +45,21 @@ export const getTimelockTransactionsInBlockRangeAsc = async (): Promise<
     const etherscanInfo: EtherscanInfo = etherscanApiUrlMap[chain];
     const chainTimelocks: Record<string, TimelockStateInfo> =
       timelockMap[chain];
+
+    let [startBlock, endBlock] = [0, 0];
+    const { apiUrl, apiToken } = etherscanInfo;
+
+    try {
+      startBlock = await getBlockFromEtherscan(apiUrl, startTime, apiToken);
+      endBlock = await getBlockFromEtherscan(apiUrl, endTime, apiToken);
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (e: any) {
+      console.log(`Failed to get start and end blocks`);
+      console.log(`${e}`);
+      console.log(`${e.toString()}`);
+      continue;
+    }
 
     // loop through all timelocks in chain
     for (const nickname of Object.keys(chainTimelocks)) {
@@ -62,11 +76,14 @@ export const getTimelockTransactionsInBlockRangeAsc = async (): Promise<
         transactionList = await getTransactionList(
           address,
           startBlock,
+          endBlock,
           etherscanInfo
         );
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (e: any) {
         console.log(`Failed to pull tx list for timelock: ${nickname}`);
+        console.log(`${e}`);
+        console.log(`${e.toString()}`);
         // may not need if array above stays empty after call fails
         continue;
       }

@@ -1,15 +1,15 @@
 import Discord from "discord.js";
 
 import { MessageArgumentReader } from "discord-command-parser";
-import { getBlockIndex } from "../../../state/state";
+import { getIndex } from "../../../state/state";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const blockHandler = (
+export const indexHandler = (
   _reader: MessageArgumentReader,
   channel: Discord.TextChannel
 ): void => {
-  const block = getBlockIndex();
+  const index = getIndex();
 
-  const message = `Last refresh at block: ${block}`;
+  const message = `Last refresh at timestamp: ${index}`;
   channel.send(message);
 };

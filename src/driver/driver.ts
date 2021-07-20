@@ -1,6 +1,7 @@
 import { TextChannel } from "discord.js";
 import * as State from "../state/state";
-import { getTimelockTransactionsInBlockRangeAsc } from "./helpers/getTimelockTransactionsSinceStartBlockAsc";
+import { getIndex } from "../state/state";
+import { getTimelockTransactionsInTimeRangeAsc } from "./helpers/getTimelockTransactionsSinceStartBlockAsc";
 import { notifyOfTimelockTransactions } from "./helpers/notifyOfTimelockTransactions";
 
 export const driver = async (channel: TextChannel): Promise<void> => {
@@ -14,10 +15,14 @@ export const driver = async (channel: TextChannel): Promise<void> => {
 };
 
 export const loop = async (channel: TextChannel): Promise<void> => {
-  const transactions = await getTimelockTransactionsInBlockRangeAsc();
+  const startTime = getIndex();
+  const endTime = Date.now();
+  const transactions = await getTimelockTransactionsInTimeRangeAsc(
+    startTime,
+    endTime
+  );
   notifyOfTimelockTransactions(channel, transactions);
-  // TODO: get current block via api
-  State.setBlockIndex(0);
+  State.setIndex(endTime);
 };
 
 const sleep = async (hours: number) => {
