@@ -8,7 +8,8 @@ export const driver = async (channel: TextChannel): Promise<void> => {
   while (State.getIsRunning()) {
     const pollingInterval = State.getPollingInterval();
 
-    loop(channel);
+    // Do we need to await?
+    await loop(channel);
 
     await sleep(pollingInterval);
   }
