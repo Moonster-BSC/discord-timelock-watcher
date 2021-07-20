@@ -33,11 +33,8 @@ export const listHandler = (
 
 const buildMessageFromTimelockInfo = (info: TimelockStateInfo) => {
   const { nickname, address } = info;
-  const message = `
-**${nickname}**
-address: ${address}
-
-`;
+  const message = `**${nickname}**
+address: ${address}`;
   return message;
 };
 
@@ -45,11 +42,9 @@ const buildMessagesFromTimelockInfo = (infos: TimelockStateInfo[]) => {
   let fullMessage = "";
   infos.forEach((info) => {
     const message = buildMessageFromTimelockInfo(info);
-    fullMessage = `
-${fullMessage}
+    fullMessage = `${fullMessage}
 
-${message}
-`;
+${message}`;
   });
   return fullMessage;
 };
