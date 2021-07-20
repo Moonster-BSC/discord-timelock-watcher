@@ -3,7 +3,9 @@ import { promises as fs } from "fs";
 import { getIndex } from "../state/state";
 
 // dumps timelock map to json
-export const snapTimelockMap = async (timelockMap: TimelockMap) => {
+export const snapTimelockMap = async (
+  timelockMap: TimelockMap
+): Promise<void> => {
   const jsonStr = JSON.stringify(timelockMap);
   const logPath = "./log";
   const index = getIndex();
