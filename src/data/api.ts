@@ -10,7 +10,8 @@ export const getTransactionList = async (
   startBlock: number,
   endBlock: number,
   etherscanInfo: EtherscanInfo
-): Promise<Transaction[]> => {
+  // returns string when rate limited
+): Promise<Transaction[] | string> => {
   const { apiUrl: url, apiToken } = etherscanInfo;
   const apiRoute = `/api?module=account&action=txlist&address=${address}&startblock=${startBlock}&endBlock=${endBlock}&sort=asc&apikey=${apiToken}`;
   const fullUrl = `${url}${apiRoute}`;

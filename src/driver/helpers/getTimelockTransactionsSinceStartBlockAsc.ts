@@ -70,12 +70,21 @@ export const getTimelockTransactionsInTimeRangeAsc = async (
       // 1. Make api call to get all transactions.
       let transactionList: Transaction[] = [];
       try {
-        transactionList = await getTransactionList(
+        const resp = await getTransactionList(
           address,
           startBlock,
           endBlock,
           etherscanInfo
         );
+
+        // when rate limited, resp is string.
+        if (isString(resp)) {
+          throw resp;
+        }
+
+        // forced cast since we know from above condition its not string
+        transactionList = resp as Transaction[];
+
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (e: any) {
         console.log(`Failed to pull tx list for timelock: ${nickname}`);
@@ -112,4 +121,10 @@ export const getTimelockTransactionsInTimeRangeAsc = async (
     });
 
   return sortedTransactions;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isString = (str: any): boolean => {
+  const ret = str instanceof String || typeof str === "string";
+  return ret;
 };

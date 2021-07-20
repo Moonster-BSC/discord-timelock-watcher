@@ -1,4 +1,6 @@
 import { SupportedChainId } from "../types/supportedChains";
+import dotenv from "dotenv";
+dotenv.config();
 
 export interface EtherscanInfo {
   uiUrl: string;
@@ -14,7 +16,7 @@ const apiTokenKeyMap: Record<SupportedChainId, string> = {
 };
 
 const getApiToken = (key: string) => {
-  const token = key in process.env === true ? process.env[key] : "";
+  const token = process.env[key] ? process.env[key] : "";
   return token;
 };
 
