@@ -16,8 +16,9 @@ export const driver = async (channel: TextChannel): Promise<void> => {
 };
 
 export const loop = async (channel: TextChannel): Promise<void> => {
+  const endBuffer = 60 * 10; // 10 min buffer
   const startTime = getIndex();
-  const endTime = getUtcSecondsFromDate(new Date());
+  const endTime = getUtcSecondsFromDate(new Date()) - endBuffer;
   const transactions = await getTimelockTransactionsInTimeRangeAsc(
     startTime,
     endTime
