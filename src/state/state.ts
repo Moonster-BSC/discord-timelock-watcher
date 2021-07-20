@@ -5,6 +5,7 @@ import { SupportedChainId, supportedChains } from "../types/supportedChains";
 import { getUtcSecondsFromDate } from "../driver/helpers/getUtcSecondsFromDate";
 import { ChainId } from "blockchain-addressbook";
 import { getInitTimelockMap } from "./getInitTimelockMap";
+import { TimelockMap } from "../types/TimelockMap";
 
 /* STATE VARIABLES */
 
@@ -35,10 +36,7 @@ const isChainTrackedMap: Record<SupportedChainId, boolean> = {
 };
 
 // map of timelocks to track. Nickname to address map. Comes with some defaults, for testing
-const timelockMap: Record<
-  SupportedChainId,
-  Record<string, TimelockStateInfo>
-> = getInitTimelockMap();
+const timelockMap: TimelockMap = getInitTimelockMap();
 
 /* STATE GETTERS */
 

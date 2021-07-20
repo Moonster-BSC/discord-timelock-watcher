@@ -1,6 +1,6 @@
-import { SupportedChainId, supportedChains } from "../types/supportedChains";
-import { TimelockStateInfo } from "../types/timelockStateInfo";
+import { supportedChains } from "../types/supportedChains";
 import { addressBook } from "blockchain-addressbook";
+import { TimelockMap } from "../types/TimelockMap";
 const {
   polygon: {
     platforms: { polypup, polypupBone },
@@ -9,14 +9,8 @@ const {
 
 // need to either read this from json file, that we periodically dump to, or just read this from a db on init.
 // For now this is just using hardcoded state and isn't persisting it anywhere else besides in memory.
-export const getInitTimelockMap = (): Record<
-  SupportedChainId,
-  Record<string, TimelockStateInfo>
-> => {
-  const timelockMap: Record<
-    SupportedChainId,
-    Record<string, TimelockStateInfo>
-  > = {
+export const getInitTimelockMap = (): TimelockMap => {
+  const timelockMap: TimelockMap = {
     [supportedChains.polygon]: {
       polypup: {
         nickname: "polypup",
