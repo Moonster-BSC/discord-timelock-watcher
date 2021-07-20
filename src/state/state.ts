@@ -1,14 +1,10 @@
 // State of the app. Used by main driver. Can be modified via bot commands. State variables should be moved to db really
 
 import { TimelockStateInfo } from "../types/timelockStateInfo";
-import { addressBook, ChainId } from "blockchain-addressbook";
 import { SupportedChainId, supportedChains } from "../types/supportedChains";
 import { getUtcSecondsFromDate } from "../driver/helpers/getUtcSecondsFromDate";
-const {
-  polygon: {
-    platforms: { polypup, polypupBone },
-  },
-} = addressBook;
+import { ChainId } from "blockchain-addressbook";
+import { getInitTimelockMap } from "./getInitTimelockMap";
 
 /* STATE VARIABLES */
 
@@ -33,40 +29,16 @@ let pollingInterval = oneHour;
 const isChainTrackedMap: Record<SupportedChainId, boolean> = {
   // these are default values
   [supportedChains.polygon]: true,
-  [supportedChains.bsc]: false,
-  [supportedChains.heco]: false,
-  [supportedChains.fantom]: false,
+  [supportedChains.bsc]: true,
+  [supportedChains.heco]: true,
+  [supportedChains.fantom]: true,
 };
 
 // map of timelocks to track. Nickname to address map. Comes with some defaults, for testing
 const timelockMap: Record<
   SupportedChainId,
   Record<string, TimelockStateInfo>
-> = {
-  [supportedChains.polygon]: {
-    polypup: {
-      nickname: "polypup",
-      address: polypup.timelock,
-      chainId: supportedChains.polygon,
-      isActivelyWatched: true,
-    },
-    polypupBone: {
-      nickname: "polypupBone",
-      address: polypupBone.timelock,
-      chainId: supportedChains.polygon,
-      isActivelyWatched: true,
-    },
-    xYeld: {
-      nickname: "xYeld",
-      address: "0x6a582111f1b9d5a579bae011948067a9a09e2d8b",
-      chainId: supportedChains.polygon,
-      isActivelyWatched: true,
-    },
-  },
-  [supportedChains.bsc]: {},
-  [supportedChains.fantom]: {},
-  [supportedChains.heco]: {},
-};
+> = getInitTimelockMap();
 
 /* STATE GETTERS */
 
