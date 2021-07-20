@@ -37,7 +37,14 @@ export const getInitTimelockMap = (): Record<
         isActivelyWatched: true,
       },
     },
-    [supportedChains.bsc]: {},
+    [supportedChains.bsc]: {
+      biswap: {
+        nickname: "biswap",
+        address: "0xf5d6fed0f4735ff2036ce4be535bd32e77dae9fe",
+        chainId: supportedChains.bsc,
+        isActivelyWatched: true,
+      },
+    },
     [supportedChains.fantom]: {},
     [supportedChains.heco]: {},
   };

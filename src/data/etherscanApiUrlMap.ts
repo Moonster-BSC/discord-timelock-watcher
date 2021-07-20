@@ -6,24 +6,37 @@ export interface EtherscanInfo {
   apiToken?: string;
 }
 
+const apiTokenKeyMap: Record<SupportedChainId, string> = {
+  bsc: "bsc_apitoken",
+  polygon: "polygon_apitoken",
+  heco: "heco_apitoken",
+  fantom: "fantom_apitoken",
+};
+
+const getApiToken = (key: string) => {
+  const token = key in process.env === true ? process.env[key] : "";
+  return token;
+};
+
 export const etherscanApiUrlMap: Record<SupportedChainId, EtherscanInfo> = {
   bsc: {
-    uiUrl: "",
+    uiUrl: "bscscan.com",
     apiUrl: "https://api.bscscan.com",
-    apiToken: "",
+    apiToken: getApiToken(apiTokenKeyMap.bsc),
   },
   polygon: {
     uiUrl: "polygonscan.com",
     apiUrl: "https://api.polygonscan.com",
+    apiToken: getApiToken(apiTokenKeyMap.bsc),
   },
   fantom: {
-    uiUrl: "",
+    uiUrl: "ftmscan.com",
     apiUrl: "https://api.ftmscan.com",
-    apiToken: "",
+    apiToken: getApiToken(apiTokenKeyMap.bsc),
   },
   heco: {
-    uiUrl: "",
+    uiUrl: "hecoscan.xyz",
     apiUrl: "https://api.hecoinfo.com",
-    apiToken: "",
+    apiToken: getApiToken(apiTokenKeyMap.bsc),
   },
 } as const;
