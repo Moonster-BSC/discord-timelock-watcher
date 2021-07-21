@@ -2,6 +2,9 @@ import { parse, ParsedMessage, ParserOptions } from "discord-command-parser";
 import Discord from "discord.js";
 import { BotCommands, commandMap } from "./commandMap";
 
+import dotenv from "dotenv";
+dotenv.config();
+
 const parserOptions: ParserOptions = {
   allowBots: false,
   allowSpaceBeforeCommand: true,
@@ -14,7 +17,13 @@ const commandPrefix = "!";
 // const spyRoleId = "123456789";
 
 export const messageEventHandler = (message: Discord.Message): void => {
-  // TODO: check role
+  const devRoleId = process.env["dev_role_id"];
+  if (
+    devRoleId !== undefined &&
+    message.member?.roles.cache.has(devRoleId) === false
+  ) {
+    message.channel.send("Only Devs can send commands to bot");
+  }
 
   const parsed: ParsedMessage<Discord.Message> = parse(
     message,
