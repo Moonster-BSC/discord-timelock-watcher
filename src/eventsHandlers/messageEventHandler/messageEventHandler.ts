@@ -18,8 +18,10 @@ const commandPrefix = "!";
 
 export const messageEventHandler = (message: Discord.Message): void => {
   const devRoleId = process.env["dev_role_id"];
+  const beefyOgRoleId = process.env["beefyog_role_id"]; // TODO move this to config file and make it array of roles
   if (
     devRoleId !== undefined &&
+    beefyOgRoleId != undefined &&
     message.member?.roles.cache.has(devRoleId) === false
   ) {
     // For some reason this gets sent like 10 times on my server. Not sure why this method is called so many times, maybe theres built in retry and the return statement is incorrect
