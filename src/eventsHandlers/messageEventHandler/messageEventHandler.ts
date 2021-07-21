@@ -23,6 +23,7 @@ export const messageEventHandler = (message: Discord.Message): void => {
     message.member?.roles.cache.has(devRoleId) === false
   ) {
     message.channel.send("Only Devs can send commands to bot");
+    return;
   }
 
   const parsed: ParsedMessage<Discord.Message> = parse(
