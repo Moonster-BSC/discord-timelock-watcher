@@ -22,7 +22,8 @@ export const messageEventHandler = (message: Discord.Message): void => {
     devRoleId !== undefined &&
     message.member?.roles.cache.has(devRoleId) === false
   ) {
-    message.channel.send("Only Devs can send commands to bot");
+    // For some reason this gets sent like 10 times on my server. Not sure why this method is called so many times, maybe theres built in retry and the return statement is incorrect
+    // message.channel.send("Only Devs can send commands to bot");
     return;
   }
 
