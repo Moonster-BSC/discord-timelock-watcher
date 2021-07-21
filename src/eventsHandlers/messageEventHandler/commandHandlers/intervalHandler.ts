@@ -26,6 +26,6 @@ export const getIntervalHandler = (
   channel: Discord.TextChannel
 ): void => {
   const pollingInterval = getPollingInterval();
-  const message = `Refresh interval is set to ${pollingInterval} minutes`;
+  const message = `Refresh interval is ${pollingInterval} minutes`;
   channel.send(message);
 };

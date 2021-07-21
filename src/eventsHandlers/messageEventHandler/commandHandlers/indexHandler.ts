@@ -25,6 +25,14 @@ export const setIndexHandler = (
     return;
   }
 
+  const currentIndex = getIndex();
+  const numOfDays = 2;
+  const twoDays = 60 * 60 * 24 * numOfDays;
+  if (index > currentIndex + twoDays) {
+    const message = `Index more than ${numOfDays} days in future`;
+    channel.send(message);
+  }
+
   setIndex(index);
 
   const message = `Index now set to: ${index}`;

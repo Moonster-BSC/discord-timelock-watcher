@@ -31,11 +31,11 @@ export const loop = async (
     endTime
   );
   notifyOfTimelockTransactions(channel, transactions);
-  State.setIndex(endTime);
   if (shouldSnap) {
     const timelockMap = State.getTimelockMap();
-    snapTimelockMap(timelockMap);
+    snapTimelockMap(timelockMap, startTime);
   }
+  State.setIndex(endTime);
 };
 
 const sleep = async (minutes: number) => {

@@ -12,8 +12,7 @@ import { TimelockMap } from "../types/timelockMap";
 // is main driver running, needs to be manually started
 let isRunning = false;
 
-// init starting timestamp to 3 weeks ago
-// const initTimeAgo = 60 * 60 * 24 * 7 * 3; // sec * min * hrs * days * 3 weeks
+// init starting timestamp 1 day ago
 const initTimeAgo = 60 * 60 * 24 * 1; // sec * min * hrs * 1 day
 
 const utcSecondsNow = getUtcSecondsFromDate(new Date());

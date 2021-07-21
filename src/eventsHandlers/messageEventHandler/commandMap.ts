@@ -13,6 +13,7 @@ import {
   setIntervalHandler,
   getIntervalHandler,
 } from "./commandHandlers/intervalHandler";
+import { snapHandler } from "./commandHandlers/snapHandler";
 
 export enum BotCommands {
   AddTimelock = "add",
@@ -25,7 +26,8 @@ export enum BotCommands {
   Index = "index",
   SetIndex = "setIndex",
   Interval = "interval",
-  UpdateInterval = "updateInterval",
+  SetInterval = "setInterval",
+  Snap = "snap",
 }
 
 export type BotCommandHandler = (
@@ -45,6 +47,7 @@ export const commandMap: Record<BotCommands, BotCommandHandler> = {
   [BotCommands.List]: listHandler,
   [BotCommands.Index]: indexHandler,
   [BotCommands.SetIndex]: setIndexHandler, // could combine the index and interval operations based on args.
-  [BotCommands.Interval]: setIntervalHandler,
-  [BotCommands.UpdateInterval]: getIntervalHandler,
+  [BotCommands.Interval]: getIntervalHandler,
+  [BotCommands.SetInterval]: setIntervalHandler,
+  [BotCommands.Snap]: snapHandler,
 };
