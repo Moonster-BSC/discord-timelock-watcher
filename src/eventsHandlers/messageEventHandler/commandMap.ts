@@ -14,6 +14,7 @@ import {
   getIntervalHandler,
 } from "./commandHandlers/intervalHandler";
 import { snapHandler } from "./commandHandlers/snapHandler";
+import { helpHandler } from "./commandHandlers/helpHandler";
 
 export enum BotCommands {
   AddTimelock = "add",
@@ -28,6 +29,7 @@ export enum BotCommands {
   Interval = "interval",
   SetInterval = "setInterval",
   Snap = "snap",
+  Help = "help",
 }
 
 export type BotCommandHandler = (
@@ -50,4 +52,5 @@ export const commandMap: Record<BotCommands, BotCommandHandler> = {
   [BotCommands.Interval]: getIntervalHandler,
   [BotCommands.SetInterval]: setIntervalHandler,
   [BotCommands.Snap]: snapHandler,
+  [BotCommands.Help]: helpHandler,
 };
